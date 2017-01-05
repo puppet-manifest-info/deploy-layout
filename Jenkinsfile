@@ -60,7 +60,7 @@ def buildAppServer2() {
 def prepareServers() {
       dir('$WORKSPACE') {
         // some block
-          sh 'sh provision-script.sh'
+          sh './provision-script.sh'
    }  
 //    sh 'sh /var/lib/jenkins/shell-scripts/puppet-agent.sh'
 }
