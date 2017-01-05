@@ -11,7 +11,7 @@ node('master') {
             stage ('Build nginx-load-balancer') { buildNginxLoadBalancer() }
             stage ('Build App-server-1') { buildAppServer1() }
             stage ('Build App-server-2') { buildAppServer2() }
-            stage ('Trigger testtest1') { triggerbuild() }
+//            stage ('Trigger testtest1') { triggerbuild() }
             stage ('prepare the servers') { prepareServers() }
             stage ('Deploy Catalog on nginx-load-balancer') { deployCatalogNginxLoadBalancer() }
             stage ('Deploy Catalog on app-server-1') { deployCatalogAppServer1() }
