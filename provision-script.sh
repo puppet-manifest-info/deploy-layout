@@ -39,17 +39,17 @@ echo jenkins | sudo -S docker exec puppet-master puppet cert list -a
    
 echo jenkins | sudo -S docker exec puppet-master puppet cert sign nginx-load-balancer.infostretch.com
 
-sleep 20
+sleep 5
    
 echo jenkins | sudo -S docker exec nginx-load-balancer puppet agent -t
 
-sleep 40
+sleep 5
 
 echo jenkins | sudo -S docker exec nginx-load-balancer rm -rf /var/lib/puppet/ssl
 
 echo jenkins | sudo -S docker exec puppet-master puppet cert clean nginx-load-balancer.infostretch.com
 
-sleeo 10
+sleeo 5
 
 echo jenkins | sudo -S docker exec nginx-load-balancer puppet agent -t
    
@@ -57,11 +57,11 @@ echo jenkins | sudo -S docker exec puppet-master puppet cert list -a
    
 echo jenkins | sudo -S docker exec puppet-master puppet cert sign nginx-load-balancer.infostretch.com
 
-sleep 20
+sleep 5
    
 echo jenkins | sudo -S docker exec nginx-load-balancer puppet agent -t
 
-sleep 40
+sleep 5
 
 echo jenkins | sudo -S docker exec nginx-load-balancer puppet agent -t
 
@@ -81,17 +81,17 @@ echo jenkins | sudo -S docker exec puppet-master puppet cert list -a
    
 echo jenkins | sudo -S docker exec puppet-master puppet cert sign app-server-1.infostretch.com
 
-sleep 20
+sleep 5
    
 echo jenkins | sudo -S docker exec app-server-1 puppet agent -t
 
-sleep 40
+sleep 5
 
 echo jenkins | sudo -S docker exec app-server-1 rm -rf /var/lib/puppet/ssl
 
 echo jenkins | sudo -S docker exec puppet-master puppet cert clean app-server-1.infostretch.com
 
-sleep 10
+sleep 5
 
 echo jenkins | sudo -S docker exec app-server-1 puppet agent -t
 
@@ -99,11 +99,11 @@ echo jenkins | sudo -S docker exec puppet-master puppet cert list -a
 
 echo jenkins | sudo -S docker exec puppet-master puppet cert sign app-server-1.infostretch.com
 
-sleep 20
+sleep 5
 
 echo jenkins | sudo -S docker exec app-server-1 puppet agent -t
 
-sleep 40
+sleep 5
 
 echo jenkins | sudo -S docker exec app-server-1 puppet agent -t
 
@@ -123,17 +123,17 @@ echo jenkins | sudo -S docker exec puppet-master puppet cert list -a
    
 echo jenkins | sudo -S docker exec puppet-master puppet cert sign app-server-2.infostretch.com
 
-sleep 20
+sleep 5
 
 echo jenkins | sudo -S docker exec app-server-2 puppet agent -t
 
-sleep 40
+sleep 5
 
 echo jenkins | sudo -S docker exec app-server-2 rm -rf /var/lib/puppet/ssl
 
 echo jenkins | sudo -S docker exec puppet-master puppet cert clean app-server-2.infostretch.com 
 
-sleep 10
+sleep 5
 
 echo jenkins | sudo -S docker exec app-server-2 puppet agent -t
 
@@ -141,11 +141,11 @@ echo jenkins | sudo -S docker exec puppet-master puppet cert list -a
 
 echo jenkins | sudo -S docker exec puppet-master puppet cert sign app-server-2.infostretch.com
 
-sleep 20
+sleep 5
 
 echo jenkins | sudo -S docker exec app-server-2 puppet agent -t
 
-sleep 40
+sleep 5
 
 echo jenkins | sudo -S docker exec app-server-2 puppet agent -t
 
