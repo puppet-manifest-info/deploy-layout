@@ -21,6 +21,11 @@ node('master') {
     }    
 }
 
+def scm() {
+    
+    checkout scm
+}
+
 def CleanEnv() {
 
     sh 'echo jenkins | sudo -S docker stop puppet-master nginx-load-balancer app-server-1 app-server-2'
