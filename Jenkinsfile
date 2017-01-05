@@ -6,12 +6,12 @@ node('master') {
             sh "echo jenkins | sudo -S docker ps -a"
             stage ('Git Checkout') { scm() }
 //            stage ('Clean the Environment') { CleanEnv() }
-            stage ('Prepare the Environment') { prepareEnv() }
-//          stage ('Build puppet-master') { buildPuppetMaster() }
-//          stage ('Build nginx-load-balancer') { buildNginxLoadBalancer() }
-//          stage ('Build App-server-1') { buildAppServer1() }
-//          stage ('Build App-server-2') { buildAppServer2() }
-//          stage ('Trigger testtest1') { triggerbuild() }
+//            stage ('Prepare the Environment') { prepareEnv() }
+            stage ('Build puppet-master') { buildPuppetMaster() }
+            stage ('Build nginx-load-balancer') { buildNginxLoadBalancer() }
+            stage ('Build App-server-1') { buildAppServer1() }
+            stage ('Build App-server-2') { buildAppServer2() }
+            stage ('Trigger testtest1') { triggerbuild() }
             stage ('prepare the servers') { prepareServers() }
             stage ('Deploy Catalog on nginx-load-balancer') { deployCatalogNginxLoadBalancer() }
             stage ('Deploy Catalog on app-server-1') { deployCatalogAppServer1() }
