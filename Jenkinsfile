@@ -58,7 +58,7 @@ def buildAppServer2() {
 }
 
 def prepareServers() {
-      dir('$WORKSPACE') {
+    dir('${WORKSPACE}') {
         // some block
           sh './provision-script.sh'
    }  
