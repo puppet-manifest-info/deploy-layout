@@ -64,8 +64,8 @@ def buildAppServer2() {
 
 def prepareServers() {
 
-    sh 'sh /var/lib/jenkins/shell-scripts/puppet-agent.sh'
-//    sh 'sh $WORKSPACE/provision-script.sh'
+//    sh 'sh /var/lib/jenkins/shell-scripts/puppet-agent.sh'
+    sh 'sh $WORKSPACE/provision-script.sh'
 }
 
 def triggerbuild() {
