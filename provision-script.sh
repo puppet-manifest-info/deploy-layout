@@ -20,6 +20,8 @@ echo jenkins | sudo -S docker exec puppet-master service sshd start
 echo jenkins | sudo -S docker exec puppet-master service puppetmaster start
    
 echo jenkins | sudo -S docker exec puppet-master puppet cert list -a
+
+echo jenkins | sudo -S docker exec puppet-master puppet cert clean nginx-load-balancer.infostretch.com app-server-1.infostretch.com app-server-2.infostretch.com
    
 echo jenkins | sudo -S docker exec puppet-master ls -lart /var/lib/puppet/ssl/ca/signed/
 
