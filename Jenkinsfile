@@ -5,7 +5,7 @@ node('master') {
  //         step([$class: 'WsCleanup'])
             sh "echo jenkins | sudo -S docker ps -a"
             stage ('Git Checkout') { scm() }
-            stage ('Clean the Environment') { CleanEnv() }
+//            stage ('Clean the Environment') { CleanEnv() }
             stage ('Prepare the Environment') { prepareEnv() }
 //          stage ('Build puppet-master') { buildPuppetMaster() }
 //          stage ('Build nginx-load-balancer') { buildNginxLoadBalancer() }
