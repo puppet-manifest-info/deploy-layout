@@ -114,10 +114,12 @@ def prepareNginxLoadBalancer() {
     sh "echo icpl123# | sudo -S docker exec nginx-load-balancer yum update -y" 
    
     sh "echo icpl123# | sudo -S docker exec nginx-load-balancer service sshd start"
-
-//    sh "echo icpl123# | sudo -S docker exec nginx-load-balancer rm -rf /var/lib/puppet/ssl"
-   
+        
     sh "echo icpl123# | sudo -S docker exec nginx-load-balancer service puppet start"
+
+    sh "echo icpl123# | sudo -S docker exec nginx-load-balancer rm -rf /var/lib/puppet/ssl"
+   
+    sh "echo icpl123# | sudo -S docker exec nginx-load-balancer service puppet restart"
 
     sh "echo icpl123# | sudo -S docker exec nginx-load-balancer puppet agent -t"
    
@@ -140,10 +142,12 @@ def prepareAppServer1() {
    sh "echo icpl123# | sudo -S docker exec app-server-1 yum update -y" 
 
    sh "echo icpl123# | sudo -S docker exec app-server-1 service sshd start"
-   
-//   sh "echo icpl123# | sudo -S docker exec app-server-1 rm -rf /var/lib/puppet/ssl"
-
+        
    sh "echo icpl123# | sudo -S docker exec app-server-1 service puppet start"
+   
+   sh "echo icpl123# | sudo -S docker exec app-server-1 rm -rf /var/lib/puppet/ssl"
+
+   sh "echo icpl123# | sudo -S docker exec app-server-1 service puppet restart"
    
    sh "echo icpl123# | sudo -S docker exec app-server-1 puppet agent -t"
    
@@ -165,10 +169,12 @@ def prepareAppServer2() {
    sh "echo icpl123# | sudo -S docker exec app-server-2 yum update -y" 
 
    sh "echo icpl123# | sudo -S docker exec app-server-2 service sshd start"
-   
-//   sh "echo icpl123# | sudo -S docker exec app-server-2 rm -rf /var/lib/puppet/ssl"
-
+        
    sh "echo icpl123# | sudo -S docker exec app-server-2 service puppet start"
+   
+   sh "echo icpl123# | sudo -S docker exec app-server-2 rm -rf /var/lib/puppet/ssl"
+
+   sh "echo icpl123# | sudo -S docker exec app-server-2 service puppet restart"
    
    sh "echo icpl123# | sudo -S docker exec app-server-2 puppet agent -t"
    
