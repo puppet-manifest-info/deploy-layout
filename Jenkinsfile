@@ -4,6 +4,7 @@ node('ILSIEDISON') {
         timestamps {
  //         step([$class: 'WsCleanup'])
             sh "echo icpl123# | sudo -S docker ps -a"
+            sh "ls -lart && rm -rf * && ls -lart"
             stage ('Git Checkout') { scm() }
             stage ('Setup Docker Environment') { setupEnv() }
 //            stage ('Prepare the Environment') { prepareEnv() }
@@ -16,7 +17,7 @@ node('ILSIEDISON') {
             stage ('Deploy Catalog on nginx-load-balancer') { deployCatalogNginxLoadBalancer() }
             stage ('Deploy Catalog on app-server-1') { deployCatalogAppServer1() }
             stage ('Deploy Catalog on app-server-2') { deployCatalogAppServer2() }
-            step([$class: 'WsCleanup'])
+//            step([$class: 'WsCleanup'])
         }
     }    
 }
