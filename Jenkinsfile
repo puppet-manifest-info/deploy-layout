@@ -47,7 +47,7 @@ def prepareEnv() {
 
 def buildPuppetMaster() {
     
-    sh 'echo jenkins | sudo -S docker run --net puppetdemo --ip 172.18.0.22 -dit -v /var/lib/jenkins/dockerResources:/var/lib/jenkins/dockerResources --add-host "nginx-load-balancer  nginx-load-balancer.infostretch.com":172.18.0.23 --add-host "app-server-1  app-server-1.infostretch.com":172.18.0.24 --add-host "app-server-2  app-server-2.infostretch.com":172.18.0.25 --add-host "jenkins  jenkins.infostretch.com":172.18.0.26 --name puppet-master -h puppet-master.infostretch.com -p 8081:8080 peddadabrp/puppet-demo:master.1.0.6 bash'
+    sh 'echo jenkins | sudo -S docker run --net puppetdemo --ip 172.18.0.22 -dit -v /var/lib/jenkins/dockerResources:/var/lib/jenkins/dockerResources --add-host "nginx-load-balancer  nginx-load-balancer.infostretch.com":172.18.0.23 --add-host "app-server-1  app-server-1.infostretch.com":172.18.0.24 --add-host "app-server-2  app-server-2.infostretch.com":172.18.0.25 --add-host "jenkins  jenkins.infostretch.com":172.18.0.26 --name puppet-master -h puppet-master.infostretch.com -p 8081:8080 peddadabrp/puppet-demo:master.1.0.7 bash'
 }
 
 def buildNginxLoadBalancer() {
