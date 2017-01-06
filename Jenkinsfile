@@ -129,11 +129,11 @@ def prepareNginxLoadBalancer() {
 
     sh "sleep 5"
    
-    sh "echo icpl123# | sudo -S docker exec nginx-load-balancer puppet agent -t"
+    sh "nohup echo icpl123# | sudo -S docker exec nginx-load-balancer puppet agent -t &"
 
-    sh "sleep 5"
-
-   sh "echo icpl123# | sudo -S docker exec nginx-load-balancer puppet agent -t"
+//    sh "sleep 5"
+        
+ //   sh "echo icpl123# | sudo -S docker exec nginx-load-balancer puppet agent -t"
 
 }
 
@@ -157,11 +157,11 @@ def prepareAppServer1() {
 
    sh "sleep 5"
    
-   sh "echo icpl123# | sudo -S docker exec app-server-1 puppet agent -t"
+   sh "nohup echo icpl123# | sudo -S docker exec app-server-1 puppet agent -t &"
 
-   sh "sleep 5"
+//   sh "sleep 5"
 
-   sh "echo icpl123# | sudo -S docker exec app-server-1 puppet agent -t"
+//   sh "echo icpl123# | sudo -S docker exec app-server-1 puppet agent -t"
 }
 
 def prepareAppServer2() {
@@ -184,9 +184,9 @@ def prepareAppServer2() {
 
    sh "sleep 5"
    
-   sh "echo icpl123# | sudo -S docker exec app-server-2 puppet agent -t"
+   sh "nohup echo icpl123# | sudo -S docker exec app-server-2 puppet agent -t &"
 
-   sh "sleep 5"
+//   sh "sleep 5"
 
-   sh "echo icpl123# | sudo -S docker exec app-server-2 puppet agent -t"
+//   sh "echo icpl123# | sudo -S docker exec app-server-2 puppet agent -t"
 }
