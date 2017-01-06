@@ -115,7 +115,7 @@ def prepareNginxLoadBalancer() {
    
     sh "echo icpl123# | sudo -S docker exec nginx-load-balancer service sshd start"
 
-    sh "echo icpl123# | sudo -S docker exec nginx-load-balancer rm -rf /var/lib/puppet/ssl"
+//    sh "echo icpl123# | sudo -S docker exec nginx-load-balancer rm -rf /var/lib/puppet/ssl"
    
     sh "echo icpl123# | sudo -S docker exec nginx-load-balancer service puppet start"
 
@@ -141,7 +141,7 @@ def prepareAppServer1() {
 
    sh "echo icpl123# | sudo -S docker exec app-server-1 service sshd start"
    
-   sh "echo icpl123# | sudo -S docker exec app-server-1 rm -rf /var/lib/puppet/ssl"
+//   sh "echo icpl123# | sudo -S docker exec app-server-1 rm -rf /var/lib/puppet/ssl"
 
    sh "echo icpl123# | sudo -S docker exec app-server-1 service puppet start"
    
@@ -166,7 +166,7 @@ def prepareAppServer2() {
 
    sh "echo icpl123# | sudo -S docker exec app-server-2 service sshd start"
    
-   sh "echo icpl123# | sudo -S docker exec app-server-2 rm -rf /var/lib/puppet/ssl"
+//   sh "echo icpl123# | sudo -S docker exec app-server-2 rm -rf /var/lib/puppet/ssl"
 
    sh "echo icpl123# | sudo -S docker exec app-server-2 service puppet start"
    
