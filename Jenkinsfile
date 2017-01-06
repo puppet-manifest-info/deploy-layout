@@ -186,7 +186,7 @@ def prepareAppServer2() {
    
    sh "echo icpl123# | sudo -S docker exec puppet-master puppet cert list -a"
    
-   sh "echo icpl123# | sudo -S docker exec puppet-master puppet cert sign app-server-1.infostretch.com"
+   sh "echo icpl123# | sudo -S docker exec puppet-master puppet cert sign app-server-2.infostretch.com"
 
    sh "sleep 5"
    
