@@ -5,7 +5,7 @@ node('master') {
  //         step([$class: 'WsCleanup'])
             sh "echo jenkins | sudo -S docker ps -a"
             stage ('Git Checkout') { scm() }
-            stage ('Clean the Environment') { CleanEnv() }
+            stage ('Setup Docker Environment') { CleanEnv() }
 //            stage ('Prepare the Environment') { prepareEnv() }
             stage ('Build puppet-master') { buildPuppetMaster() }
             stage ('Build nginx-load-balancer') { buildNginxLoadBalancer() }
@@ -28,6 +28,8 @@ def scm() {
 
 def CleanEnv() {
 
+    sh 'echo jenkins | sudo -S docker pull peddadabrp/puppet-demo:master.1.0.7'
+    sh 'echo jenkins | sudo -S docker pull peddadabrp/puppet-demo:agent.1.0.2'
     sh 'echo jenkins | sudo -S docker stop puppet-master nginx-load-balancer app-server-1 app-server-2'
     sh 'echo jenkins | sudo -S docker rm puppet-master nginx-load-balancer app-server-1 app-server-2'
 
