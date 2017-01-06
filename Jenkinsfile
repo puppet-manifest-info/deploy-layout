@@ -1,4 +1,4 @@
-node('master') {
+node('ILSIEDISON') {
     wrap([$class: 'AnsiColorBuildWrapper', colorMapName: 'xterm']) {
 
         timestamps {
