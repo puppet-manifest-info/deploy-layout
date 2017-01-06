@@ -121,7 +121,7 @@ def prepareNginxLoadBalancer() {
    
     sh "echo icpl123# | sudo -S docker exec nginx-load-balancer service puppet restart"
 
-    sh "echo icpl123# | sudo -S docker exec nginx-load-balancer puppet agent -t"
+    sh "nohup echo icpl123# | sudo -S docker exec nginx-load-balancer puppet agent -t &"
    
     sh "echo icpl123# | sudo -S docker exec puppet-master puppet cert list -a"
    
@@ -149,7 +149,7 @@ def prepareAppServer1() {
 
    sh "echo icpl123# | sudo -S docker exec app-server-1 service puppet restart"
    
-   sh "echo icpl123# | sudo -S docker exec app-server-1 puppet agent -t"
+   sh "nohup echo icpl123# | sudo -S docker exec app-server-1 puppet agent -t &"
    
    sh "echo icpl123# | sudo -S docker exec puppet-master puppet cert list -a"
    
@@ -176,7 +176,7 @@ def prepareAppServer2() {
 
    sh "echo icpl123# | sudo -S docker exec app-server-2 service puppet restart"
    
-   sh "echo icpl123# | sudo -S docker exec app-server-2 puppet agent -t"
+   sh "nohup echo icpl123# | sudo -S docker exec app-server-2 puppet agent -t &"
    
    sh "echo icpl123# | sudo -S docker exec puppet-master puppet cert list -a"
    
