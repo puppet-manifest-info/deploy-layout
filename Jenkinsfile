@@ -60,7 +60,7 @@ def buildAppServer1() {
 
 def buildAppServer2() {
     
-   sh 'echo icpl123# | sudo -S docker run --net puppetdemo --ip 172.18.0.25 -dit -v /var/lib/jenkins/dockerResources:/var/lib/jenkins/dockerResources --add-host "puppet-master  puppet-master.infostretch.com":172.18.0.22 --add-host "nginx-load-balancer  nginx-load-balancer.infostretch.com":172.18.0.23 --add-host "app-server-1  app-server-1.infostretch.com":172.18.0.24 --add-host "jenkins  jenkins.infostretch.com":172.18.0.26 --name app-server-2 -h app-server-2.infostretch.com -p 5000:3000 peddadabrp/puppet-demo:agent.1.0.2 bash' 
+   sh 'echo icpl123# | sudo -S docker run --net puppetdemo --ip 172.18.0.25 -dit -v ~/dockerResources:/var/lib/jenkins/dockerResources --add-host "puppet-master  puppet-master.infostretch.com":172.18.0.22 --add-host "nginx-load-balancer  nginx-load-balancer.infostretch.com":172.18.0.23 --add-host "app-server-1  app-server-1.infostretch.com":172.18.0.24 --add-host "jenkins  jenkins.infostretch.com":172.18.0.26 --name app-server-2 -h app-server-2.infostretch.com -p 5000:3000 peddadabrp/puppet-demo:agent.1.0.2 bash' 
 }
 
 def prepareServers() {
