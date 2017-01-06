@@ -20,7 +20,7 @@ node('ILSIEDISON') {
             stage ('Deploy Catalog on nginx-load-balancer') { deployCatalogNginxLoadBalancer() }
             stage ('Deploy Catalog on app-server-1') { deployCatalogAppServer1() }
             stage ('Deploy Catalog on app-server-2') { deployCatalogAppServer2() }
-            step([$class: 'WsCleanup'])
+//            step([$class: 'WsCleanup'])
         }   
 }
 
