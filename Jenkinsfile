@@ -12,7 +12,11 @@ node('ILSIEDISON') {
             stage ('Build App-server-1') { buildAppServer1() }
             stage ('Build App-server-2') { buildAppServer2() }
 //            stage ('Trigger testtest1') { triggerbuild() }
-            stage ('prepare the servers') { prepareServers() }
+//            stage ('prepare the servers') { prepareServers() }
+            stage ('Prepare Puppet-master') { preparePuppetMaster() } 
+            stage ('Prepare Puppet-master') { prepareNginxLoadBalancer() }
+            stage ('Prepare Puppet-master') { prepareAppServer1() }  
+            stage ('Prepare Puppet-master') { prepareAppServer2() }
             stage ('Deploy Catalog on nginx-load-balancer') { deployCatalogNginxLoadBalancer() }
             stage ('Deploy Catalog on app-server-1') { deployCatalogAppServer1() }
             stage ('Deploy Catalog on app-server-2') { deployCatalogAppServer2() }
@@ -92,3 +96,91 @@ def deployCatalogAppServer2() {
     sh 'sleep 10'
 }
 
+def preparePuppetMaster() {
+        
+    sh "echo icpl123# | sudo -S docker exec puppet-master yum update -y" 
+   
+    sh "echo icpl123# | sudo -S docker exec puppet-master service sshd start"
+   
+    sh "echo icpl123# | sudo -S docker exec puppet-master service puppetmaster start"
+   
+    sh "echo icpl123# | sudo -S docker exec puppet-master puppet cert list -a"
+
+    sh "echo icpl123# | sudo -S docker exec puppet-master puppet cert clean nginx-load-balancer.infostretch.com app-server-1.infostretch.com app-server-2.infostretch.com"
+}        
+
+def prepareNginxLoadBalancer() {
+        
+    sh "echo icpl123# | sudo -S docker exec nginx-load-balancer yum update -y" 
+   
+    sh "echo icpl123# | sudo -S docker exec nginx-load-balancer service sshd start"
+
+    sh "echo icpl123# | sudo -S docker exec nginx-load-balancer rm -rf /var/lib/puppet/ssl"
+   
+    sh "echo icpl123# | sudo -S docker exec nginx-load-balancer service puppet start"
+
+    sh "echo icpl123# | sudo -S docker exec nginx-load-balancer puppet agent -t"
+   
+    sh "echo icpl123# | sudo -S docker exec puppet-master puppet cert list -a"
+   
+    sh "echo icpl123# | sudo -S docker exec puppet-master puppet cert sign nginx-load-balancer.infostretch.com"
+
+    sh "sleep 5"
+   
+    sh "echo icpl123# | sudo -S docker exec nginx-load-balancer puppet agent -t"
+
+    sh "sleep 5"
+
+   sh "echo icpl123# | sudo -S docker exec nginx-load-balancer puppet agent -t"
+
+}
+
+def prepareAppServer1() {
+        
+   sh "echo icpl123# | sudo -S docker exec app-server-1 yum update -y" 
+
+   sh "echo icpl123# | sudo -S docker exec app-server-1 service sshd start"
+   
+   sh "echo icpl123# | sudo -S docker exec app-server-1 rm -rf /var/lib/puppet/ssl"
+
+   sh "echo icpl123# | sudo -S docker exec app-server-1 service puppet start"
+   
+   sh "echo icpl123# | sudo -S docker exec app-server-1 puppet agent -t"
+   
+   sh "echo icpl123# | sudo -S docker exec puppet-master puppet cert list -a"
+   
+   sh "echo icpl123# | sudo -S docker exec puppet-master puppet cert sign app-server-1.infostretch.com"
+
+   sh "sleep 5"
+   
+   sh "echo icpl123# | sudo -S docker exec app-server-1 puppet agent -t"
+
+   sh "sleep 5"
+
+   sh "echo icpl123# | sudo -S docker exec app-server-1 puppet agent -t"
+}
+
+def prepareAppServer2() {
+        
+   sh "echo icpl123# | sudo -S docker exec app-server-2 yum update -y" 
+
+   sh "echo icpl123# | sudo -S docker exec app-server-2 service sshd start"
+   
+   sh "echo icpl123# | sudo -S docker exec app-server-2 rm -rf /var/lib/puppet/ssl"
+
+   sh "echo icpl123# | sudo -S docker exec app-server-2 service puppet start"
+   
+   sh "echo icpl123# | sudo -S docker exec app-server-2 puppet agent -t"
+   
+   sh "echo icpl123# | sudo -S docker exec puppet-master puppet cert list -a"
+   
+   sh "echo icpl123# | sudo -S docker exec puppet-master puppet cert sign app-server-1.infostretch.com"
+
+   sh "sleep 5"
+   
+   sh "echo icpl123# | sudo -S docker exec app-server-2 puppet agent -t"
+
+   sh "sleep 5"
+
+   sh "echo icpl123# | sudo -S docker exec app-server-2 puppet agent -t"
+}
