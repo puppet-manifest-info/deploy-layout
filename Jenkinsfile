@@ -29,8 +29,6 @@ def setupEnv() {
 
     sh 'echo icpl123# | sudo -S docker pull peddadabrp/puppet-demo:master.1.0.8'
     sh 'echo icpl123# | sudo -S docker pull peddadabrp/puppet-demo:agent.1.0.2'
-    sh 'echo icpl123# | sudo -S docker network rm puppetdemo'
-    sh 'echo icpl123# | sudo -S docker network create --subnet=172.18.0.0/16 puppetdemo'
     sh 'echo icpl123# | sudo -S docker stop puppet-master nginx-load-balancer app-server-1 app-server-2'
     sh 'echo icpl123# | sudo -S docker rm puppet-master nginx-load-balancer app-server-1 app-server-2'
 
