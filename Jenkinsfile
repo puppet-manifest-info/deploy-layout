@@ -5,7 +5,7 @@ node('ILSIEDISON') {
  //         step([$class: 'WsCleanup'])
             sh "echo icpl123# | sudo -S docker ps -a"
             stage ('Git Checkout') { scm() }
-            stage ('Setup Docker Environment') { CleanEnv() }
+            stage ('Setup Docker Environment') { setupEnv() }
 //            stage ('Prepare the Environment') { prepareEnv() }
             stage ('Build puppet-master') { buildPuppetMaster() }
             stage ('Build nginx-load-balancer') { buildNginxLoadBalancer() }
@@ -26,10 +26,12 @@ def scm() {
     checkout scm
 }
 
-def CleanEnv() {
+def setupEnv() {
 
-    sh 'echo icpl123#  | sudo -S docker pull peddadabrp/puppet-demo:master.1.0.8'
+    sh 'echo icpl123# | sudo -S docker pull peddadabrp/puppet-demo:master.1.0.8'
     sh 'echo icpl123# | sudo -S docker pull peddadabrp/puppet-demo:agent.1.0.2'
+    sh 'echo icpl123# | sudo -S docker network rm puppetdemo'
+    sh 'echo icpl123# | sudo -S docker network create --subnet=172.18.0.0/16 puppetdemo'
     sh 'echo icpl123# | sudo -S docker stop puppet-master nginx-load-balancer app-server-1 app-server-2'
     sh 'echo icpl123# | sudo -S docker rm puppet-master nginx-load-balancer app-server-1 app-server-2'
 
