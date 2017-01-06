@@ -80,18 +80,19 @@ def triggerbuild() {
 
 def deployCatalogNginxLoadBalancer() {
     
-    sh 'echo icpl123# | sudo -S docker exec nginx-load-balancer puppet agent -t'
+//    sh 'echo icpl123# | sudo -S docker exec nginx-load-balancer puppet agent -t'
+    sh "sleep 5"
 }
 
 def deployCatalogAppServer1() {
     
-    sh 'echo icpl123# | sudo -S docker exec app-server-1 puppet agent -t'
+ //   sh 'echo icpl123# | sudo -S docker exec app-server-1 puppet agent -t'
     sh 'echo icpl123# | sudo -S docker exec app-server-1 nohup sh /var/lib/jenkins/app/deploy.sh &> output.txt &'
 }
 
 def deployCatalogAppServer2() {
     
-    sh 'echo icpl123# | sudo -S docker exec app-server-2 puppet agent -t'
+//    sh 'echo icpl123# | sudo -S docker exec app-server-2 puppet agent -t'
     sh 'echo icpl123# | sudo -S docker exec app-server-2 nohup sh /var/lib/jenkins/app/deploy.sh &> output.txt &'
     sh 'sleep 10'
 }
