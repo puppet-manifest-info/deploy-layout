@@ -30,7 +30,7 @@ def scm() {
 def CleanEnv() {
 
     sh 'echo jenkins | sudo -S docker pull peddadabrp/puppet-demo:master.1.0.7'
-    sh 'echo jenkins | sudo -S docker pull peddadabrp/puppet-demo:agent.1.0.2'
+    sh 'echo jenkins | sudo -S docker pull peddadabrp/puppet-demo:agent.1.0.3'
     sh 'echo jenkins | sudo -S docker stop puppet-master nginx-load-balancer app-server-1 app-server-2'
     sh 'echo jenkins | sudo -S docker rm puppet-master nginx-load-balancer app-server-1 app-server-2'
 
