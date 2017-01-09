@@ -99,7 +99,7 @@ def deployCatalogAppServer2() {
 
 def preparePuppetMaster() {
         
-    sh "echo icpl123# | sudo -S docker exec puppet-master yum update -y" 
+    //sh "echo icpl123# | sudo -S docker exec puppet-master yum update -y" 
    
     sh "echo icpl123# | sudo -S docker exec puppet-master service sshd start"
    
@@ -112,7 +112,7 @@ def preparePuppetMaster() {
 
 def prepareNginxLoadBalancer() {
         
-    sh "echo icpl123# | sudo -S docker exec nginx-load-balancer yum update -y" 
+    //sh "echo icpl123# | sudo -S docker exec nginx-load-balancer yum update -y" 
    
     sh "echo icpl123# | sudo -S docker exec nginx-load-balancer service sshd start"
         
@@ -142,7 +142,7 @@ def prepareNginxLoadBalancer() {
 
 def prepareAppServer1() {
         
-   sh "echo icpl123# | sudo -S docker exec app-server-1 yum update -y" 
+   //sh "echo icpl123# | sudo -S docker exec app-server-1 yum update -y" 
 
    sh "echo icpl123# | sudo -S docker exec app-server-1 service sshd start"
         
@@ -171,7 +171,7 @@ def prepareAppServer1() {
 
 def prepareAppServer2() {
         
-   sh "echo icpl123# | sudo -S docker exec app-server-2 yum update -y" 
+   //sh "echo icpl123# | sudo -S docker exec app-server-2 yum update -y" 
 
    sh "echo icpl123# | sudo -S docker exec app-server-2 service sshd start"
         
