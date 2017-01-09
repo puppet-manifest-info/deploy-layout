@@ -70,6 +70,7 @@ def buildAppServer2() {
 def prepareServers() {
 
 //    sh 'sh /var/lib/jenkins/shell-scripts/puppet-agent.sh'
+    sh 'chmod 755 $WORKSPACE/provision-script.sh'    
     sh 'sh $WORKSPACE/provision-script.sh'
 }
 
