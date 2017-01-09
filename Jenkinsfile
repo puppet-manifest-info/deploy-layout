@@ -12,11 +12,11 @@ node('ILSIEDISON') {
             stage ('Build App-server-1') { buildAppServer1() }
             stage ('Build App-server-2') { buildAppServer2() }
 //            stage ('Trigger testtest1') { triggerbuild() }
-//            stage ('prepare the servers') { prepareServers() }
-            stage ('Prepare Puppet-master') { preparePuppetMaster() } 
-            stage ('Prepare nginx-load-balancer') { prepareNginxLoadBalancer() }
-            stage ('Prepare app-server-1') { prepareAppServer1() }  
-            stage ('Prepare app-server-2') { prepareAppServer2() }
+            stage ('prepare the servers') { prepareServers() }
+            //stage ('Prepare Puppet-master') { preparePuppetMaster() } 
+            //stage ('Prepare nginx-load-balancer') { prepareNginxLoadBalancer() }
+            //stage ('Prepare app-server-1') { prepareAppServer1() }  
+            //stage ('Prepare app-server-2') { prepareAppServer2() }
             stage ('Deploy Catalog on nginx-load-balancer') { deployCatalogNginxLoadBalancer() }
             stage ('Deploy Catalog on app-server-1') { deployCatalogAppServer1() }
             stage ('Deploy Catalog on app-server-2') { deployCatalogAppServer2() }
