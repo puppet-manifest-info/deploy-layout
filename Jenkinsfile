@@ -79,8 +79,7 @@ def triggerbuild() {
 }
 
 def deployCatalogNginxLoadBalancer() {
-    
-    sh 'sleep 5'
+        
     sh 'echo icpl123# | sudo -S docker exec nginx-load-balancer puppet agent -t'
     sh "sleep 5"
 }
@@ -109,6 +108,8 @@ def preparePuppetMaster() {
     sh "echo icpl123# | sudo -S docker exec puppet-master puppet cert list -a"
 
     sh "echo icpl123# | sudo -S docker exec puppet-master puppet cert clean nginx-load-balancer.infostretch.com app-server-1.infostretch.com app-server-2.infostretch.com"
+        
+    sh "echo icpl123# | sudo -S docker exec puppet-master puppet cert list -a"
 }        
 
 def prepareNginxLoadBalancer() {
@@ -117,15 +118,23 @@ def prepareNginxLoadBalancer() {
    
     sh "echo icpl123# | sudo -S docker exec nginx-load-balancer service sshd start"
         
-    sh "echo icpl123# | sudo -S docker exec nginx-load-balancer service puppet start"
-
-    sh "echo icpl123# | sudo -S docker exec nginx-load-balancer rm -rf /var/lib/puppet/ssl"
-   
-    sh "echo icpl123# | sudo -S docker exec nginx-load-balancer service puppet restart"
+    sh "echo icpl123# | sudo -S docker exec nginx-load-balancer service puppet start
 
     sh "nohup echo icpl123# | sudo -S docker exec nginx-load-balancer puppet agent -t &"
         
+    sh 'sleep 10'
+    
+    sh "echo icpl123# | sudo -S docker exec nginx-load-balancer service puppet stop"
+        
+    sh "echo icpl123# | sudo -S docker exec nginx-load-balancer rm -rf /var/lib/puppet/ssl"
+        
+    sh "echo icpl123# | sudo -S docker exec puppet-master puppet cert clean nginx-load-balancer.infostretch.com
+        
+    sh "echo icpl123# | sudo -S docker exec nginx-load-balancer service puppet start"
+        
     sh "sleep 5"
+        
+    sh 'nohup echo icpl123# | sudo -S docker exec nginx-load-balancer puppet agent -t &'
    
     sh "echo icpl123# | sudo -S docker exec puppet-master puppet cert list -a"
    
@@ -149,13 +158,21 @@ def prepareAppServer1() {
         
    sh "echo icpl123# | sudo -S docker exec app-server-1 service puppet start"
    
-   sh "echo icpl123# | sudo -S docker exec app-server-1 rm -rf /var/lib/puppet/ssl"
-
-   sh "echo icpl123# | sudo -S docker exec app-server-1 service puppet restart"
-   
    sh "nohup echo icpl123# | sudo -S docker exec app-server-1 puppet agent -t &"
         
    sh "sleep 5"
+        
+   sh "echo icpl123# | sudo -S docker exec app-server-1 service puppet stop"
+        
+   sh "echo icpl123# | sudo -S docker exec app-server-1 rm -rf /var/lib/puppet/ssl"
+        
+   sh "echo icpl123# | sudo -S docker exec puppet-master puppet cert clean app-server-1.infostretch.com"
+        
+   sh "echo icpl123# | sudo -S docker exec app-server-1 service puppet start"
+        
+   sh "sleep 5"
+        
+   sh "nohup echo icpl123# | sudo -S docker exec app-server-1 puppet agent -t &"
    
    sh "echo icpl123# | sudo -S docker exec puppet-master puppet cert list -a"
    
@@ -178,14 +195,22 @@ def prepareAppServer2() {
         
    sh "echo icpl123# | sudo -S docker exec app-server-2 service puppet start"
    
-   sh "echo icpl123# | sudo -S docker exec app-server-2 rm -rf /var/lib/puppet/ssl"
-
-   sh "echo icpl123# | sudo -S docker exec app-server-2 service puppet restart"
-   
    sh "nohup echo icpl123# | sudo -S docker exec app-server-2 puppet agent -t &"
         
    sh "sleep 5"
-   
+        
+   sh "echo icpl123# | sudo -S docker exec app-server-2 service puppet stop"
+        
+   sh "echo icpl123# | sudo -S docker exec app-server-2 rm -rf /var/lib/puppet/ssl"
+        
+   sh "echo icpl123# | sudo -S docker exec puppet-master puppet cert clean app-server-2.infostretch.com"
+        
+   sh "echo icpl123# | sudo -S docker exec app-server-2 service puppet start"
+        
+   sh "sleep 5"
+        
+   sh "nohup echo icpl123# | sudo -S docker exec app-server-2 puppet agent -t &"
+        
    sh "echo icpl123# | sudo -S docker exec puppet-master puppet cert list -a"
    
    sh "echo icpl123# | sudo -S docker exec puppet-master puppet cert sign app-server-2.infostretch.com"
