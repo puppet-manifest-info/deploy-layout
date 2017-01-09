@@ -118,7 +118,7 @@ def prepareNginxLoadBalancer() {
    
     sh "echo icpl123# | sudo -S docker exec nginx-load-balancer service sshd start"
         
-    sh "echo icpl123# | sudo -S docker exec nginx-load-balancer service puppet start
+    sh "echo icpl123# | sudo -S docker exec nginx-load-balancer service puppet start"
 
     sh "nohup echo icpl123# | sudo -S docker exec nginx-load-balancer puppet agent -t &"
         
@@ -128,7 +128,7 @@ def prepareNginxLoadBalancer() {
         
     sh "echo icpl123# | sudo -S docker exec nginx-load-balancer rm -rf /var/lib/puppet/ssl"
         
-    sh "echo icpl123# | sudo -S docker exec puppet-master puppet cert clean nginx-load-balancer.infostretch.com
+    sh "echo icpl123# | sudo -S docker exec puppet-master puppet cert clean nginx-load-balancer.infostretch.com"
         
     sh "echo icpl123# | sudo -S docker exec nginx-load-balancer service puppet start"
         
