@@ -12,6 +12,7 @@ node('master') {
             stage ('Build nginx-load-balancer') { buildNginxLoadBalancer() }
             stage ('Build App-server-1') { buildAppServer1() }
             stage ('Build App-server-2') { buildAppServer2() }
+            stage ('Build Jenkins server') { buildJenkins() }
 //            stage ('Trigger testtest1') { triggerbuild() }
             stage ('prepare the servers') { prepareServers() }
             stage ('Deploy Catalog on nginx-load-balancer') { deployCatalogNginxLoadBalancer() }
@@ -41,7 +42,8 @@ def prepareEnv() {
     sh 'echo jenkins | sudo -S docker run --net puppetdemo --ip 172.18.0.22 -dit -v /var/lib/jenkins/dockerResources:/var/lib/jenkins/dockerResources --add-host "nginx-load-balancer  nginx-load-balancer.infostretch.com":172.18.0.23 --add-host "app-server-1  app-server-1.infostretch.com":172.18.0.24 --add-host "app-server-2  app-server-2.infostretch.com":172.18.0.25 --add-host "jenkins  jenkins.infostretch.com":172.18.0.26 --name puppet-master -h puppet-master.infostretch.com -p 8081:8080 peddadabrp/puppet-demo:master.1.0.7 bash'
     sh 'echo jenkins | sudo -S docker run --net puppetdemo --ip 172.18.0.23 -dit -v /var/lib/jenkins/dockerResources:/var/lib/jenkins/dockerResources --add-host "puppet-master  puppet-master.infostretch.com":172.18.0.22 --add-host "app-server-1  app-server-1.infostretch.com":172.18.0.24 --add-host "app-server-2  app-server-2.infostretch.com":172.18.0.25 --add-host "jenkins  jenkins.infostretch.com":172.18.0.26 --name nginx-load-balancer -h nginx-load-balancer.infostretch.com -p 80:80 peddadabrp/puppet-demo:agent.1.0.4 bash'
     sh 'echo jenkins | sudo -S docker run --net puppetdemo --ip 172.18.0.24 -dit -v /var/lib/jenkins/dockerResources:/var/lib/jenkins/dockerResources --add-host "puppet-master  puppet-master.infostretch.com":172.18.0.22 --add-host "nginx-load-balancer  nginx-load-balancer.infostretch.com":172.18.0.23 --add-host "app-server-2  app-server-2.infostretch.com":172.18.0.25 --add-host "jenkins  jenkins.infostretch.com":172.18.0.26 --name app-server-1 -h app-server-1.infostretch.com -p 4000:3000 peddadabrp/puppet-demo:agent.1.0.4 bash'
-    sh 'echo jenkins | sudo -S docker run --net puppetdemo --ip 172.18.0.25 -dit -v /var/lib/jenkins/dockerResources:/var/lib/jenkins/dockerResources --add-host "puppet-master  puppet-master.infostretch.com":172.18.0.22 --add-host "nginx-load-balancer  nginx-load-balancer.infostretch.com":172.18.0.23 --add-host "app-server-1  app-server-1.infostretch.com":172.18.0.24 --add-host "jenkins  jenkins.infostretch.com":172.18.0.26 --name app-server-2 -h app-server-2.infostretch.com -p 5000:3000 peddadabrp/puppet-demo:agent.1.0.4 bash' 
+    sh 'echo jenkins | sudo -S docker run --net puppetdemo --ip 172.18.0.25 -dit -v /var/lib/jenkins/dockerResources:/var/lib/jenkins/dockerResources --add-host "puppet-master  puppet-master.infostretch.com":172.18.0.22 --add-host "nginx-load-balancer  nginx-load-balancer.infostretch.com":172.18.0.23 --add-host "app-server-1  app-server-1.infostretch.com":172.18.0.24 --add-host "jenkins  jenkins.infostretch.com":172.18.0.26 --name app-server-2 -h app-server-2.infostretch.com -p 5000:3000 peddadabrp/puppet-demo:agent.1.0.4 bash'
+    sh 'echo jenkins | sudo -S docker run --net puppetdemo --ip 172.18.0.26 -dit -v /var/lib/jenkins/dockerResources:/var/lib/jenkins/dockerResources --add-host "nginx-load-balancer  nginx-load-balancer.infostretch.com":172.18.0.23 --add-host "app-server-1  app-server-1.infostretch.com":172.18.0.24 --add-host "app-server-2  app-server-2.infostretch.com":172.18.0.25 --add-host "puppet-master  puppet-master.infostretch.com":172.18.0.22 --name jenkins -h jenkins.infostretch.com -p 8082:8080 peddadabrp/puppet-demo:agent.1.0.4 bash'
 
 }
 
@@ -64,6 +66,12 @@ def buildAppServer2() {
     
    sh 'echo jenkins | sudo -S docker run --net puppetdemo --ip 172.18.0.25 -dit -v /var/lib/jenkins/dockerResources:/var/lib/jenkins/dockerResources --add-host "puppet-master  puppet-master.infostretch.com":172.18.0.22 --add-host "nginx-load-balancer  nginx-load-balancer.infostretch.com":172.18.0.23 --add-host "app-server-1  app-server-1.infostretch.com":172.18.0.24 --add-host "jenkins  jenkins.infostretch.com":172.18.0.26 --name app-server-2 -h app-server-2.infostretch.com -p 5000:3000 peddadabrp/puppet-demo:agent.1.0.4 bash' 
 }
+
+def buildJenkins() {
+ 
+    sh 'echo jenkins | sudo -S docker run --net puppetdemo --ip 172.18.0.26 -dit -v /var/lib/jenkins/dockerResources:/var/lib/jenkins/dockerResources --add-host "nginx-load-balancer  nginx-load-balancer.infostretch.com":172.18.0.23 --add-host "app-server-1  app-server-1.infostretch.com":172.18.0.24 --add-host "app-server-2  app-server-2.infostretch.com":172.18.0.25 --add-host "puppet-master  puppet-master.infostretch.com":172.18.0.22 --name jenkins -h jenkins.infostretch.com -p 8082:8080 peddadabrp/puppet-demo:agent.1.0.4 bash'
+    
+}    
 
 def prepareServers() {
 
