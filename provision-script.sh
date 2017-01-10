@@ -151,4 +151,46 @@ sleep 5
 
 echo jenkins | sudo -S docker exec app-server-2 puppet agent -t
 
+echo -e "${RED}**********${NONE} ${UNDERLINE}${GREEN}Provisioning jenkins server${NONE}${NONE} ${RED}**********${NONE}"
+
+echo jenkins | sudo -S docker exec jenkins yum update -y 
+
+echo jenkins | sudo -S docker exec jenkins service sshd start
+   
+echo jenkins | sudo -S docker exec jenkins service puppet start
+
+echo jenkins | sudo -S docker exec jenkins rm -rf /var/lib/puppet/ssl
+
+echo jenkins | sudo -S docker exec jenkins puppet agent -t
+   
+echo jenkins | sudo -S docker exec puppet-master puppet cert list -a
+   
+echo jenkins | sudo -S docker exec puppet-master puppet cert sign jenkins.infostretch.com
+
+sleep 5
+
+echo jenkins | sudo -S docker exec jenkins puppet agent -t
+
+sleep 5
+
+echo jenkins | sudo -S docker exec jenkins rm -rf /var/lib/puppet/ssl
+
+echo jenkins | sudo -S docker exec puppet-master puppet cert clean jenkins.infostretch.com 
+
+sleep 5
+
+echo jenkins | sudo -S docker exec jenkins puppet agent -t
+
+echo jenkins | sudo -S docker exec puppet-master puppet cert list -a
+
+echo jenkins | sudo -S docker exec puppet-master puppet cert sign jenkins.infostretch.com
+
+sleep 5
+
+echo jenkins | sudo -S docker exec jenkins puppet agent -t
+
+sleep 5
+
+echo jenkins | sudo -S docker exec jenkins puppet agent -t
+
 tput sgr0
