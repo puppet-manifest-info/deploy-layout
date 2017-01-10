@@ -156,6 +156,8 @@ echo -e "${RED}**********${NONE} ${UNDERLINE}${GREEN}Provisioning jenkins server
 echo jenkins | sudo -S docker exec jenkins yum update -y 
 
 echo jenkins | sudo -S docker exec jenkins service sshd start
+
+echo jenkins | sudo -S docker exec jenkins service jenkins start
    
 echo jenkins | sudo -S docker exec jenkins service puppet start
 
