@@ -187,6 +187,8 @@ echo jenkins | sudo -S docker exec puppet-master puppet cert list -a
 
 echo jenkins | sudo -S docker exec puppet-master puppet cert sign jenkins.infostretch.com
 
+echo jenkins | sudo -S docker exec puppet-master puppet cert list -a
+
 sleep 5
 
 echo jenkins | sudo -S docker exec jenkins puppet agent -t
